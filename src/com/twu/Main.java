@@ -130,4 +130,19 @@ public class Main {
         String voteString  = scanner.nextLine();
         user.voteEvent(events, voteString);
     }
+
+    public static void buyEventPage(User user, List<Event> events) {
+        System.out.println("请输入购买热搜信息，需要购买的热搜的排名，如：3");
+        Scanner scanner = new Scanner(System.in);
+        String buyEventString  = scanner.nextLine();
+        Event originEvent = user.getBuyOriginEvent(events, buyEventString);
+        if(originEvent.getPrice() == 0) {
+            System.out.println("该排名上的热搜没有人购买，任意价格即可买到该位热搜，请输入事件和价格，如：nine-500");
+        } else {
+            System.out.println(String.format("该排名上的热搜有人购买，价格为%d，需要花高于当前价格的钱即可买到该位热搜，请输入事" +
+                    "件和价格，如：nine-500", originEvent.getPrice()));
+        }
+        String eventAndPrice = scanner.nextLine();
+        user.buyEventChangePosition(events, originEvent, eventAndPrice);
+    }
 }
