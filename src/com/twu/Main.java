@@ -40,4 +40,66 @@ public class Main {
         }
 
     }
+
+    public static void managerPage(Manager manager, User user,List<Event> events) {
+        System.out.println("请选择你需要的操作：");
+        System.out.println("1.查看热搜排行榜");
+        System.out.println("2.添加热搜");
+        System.out.println("3.添加超级热搜");
+        System.out.println("4.退出");
+        Scanner scanner = new Scanner(System.in);
+        int choose = scanner.nextInt();
+        switch (choose) {
+            case 1:
+                manager.viewEvent(events);
+                managerPage(manager, user, events);
+                break;
+            case 2:
+                addEventManagerPage(manager, events);
+                managerPage(manager, user, events);
+                break;
+            case 3:
+                addSuperEventPage(manager, events);
+                managerPage(manager, user, events);
+                break;
+            case 4:
+                homePage(manager, user, events);
+                break;
+        }
+        scanner.close();
+    }
+
+
+    public static void userPage(Manager manager, User user, List<Event> events) {
+        System.out.println("请选择你需要的操作：");
+        System.out.println("1.查看热搜排行榜");
+        System.out.println("2.给热搜事件投票");
+        System.out.println("3.购买热搜");
+        System.out.println("4.添加热搜");
+        System.out.println("5.退出");
+        Scanner scanner = new Scanner(System.in);
+        int choose = scanner.nextInt();
+        switch (choose) {
+            case 1:
+                user.viewEvent(events);
+                userPage(manager, user, events);
+                break;
+            case 2:
+                voteEventPage(user, events);
+                userPage(manager, user, events);
+                break;
+            case 3:
+                buyEventPage(user, events);
+                userPage(manager, user, events);
+                break;
+            case 4:
+                addEventUserPage(user, events);
+                userPage(manager, user, events);
+                break;
+            case 5:
+                homePage(manager, user, events);
+                break;
+        }
+        scanner.close();
+    }
 }
