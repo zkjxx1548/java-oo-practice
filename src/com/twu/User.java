@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class User {
     public void viewEvent(List<Event> events) {
@@ -56,5 +57,14 @@ public class User {
         events.stream()
                 .skip(buyEvent.getRanking())
                 .forEach(event -> event.setRanking(event.getRanking() - 1));
+    }
+
+    public void addEvent(List<Event> events, String eventString) {
+        if (!events.stream()
+                .map(Event::getDescribe)
+                .collect(Collectors.toList()).contains(eventString)
+        ) {
+            events.add(new Event(0, eventString, 0));
+        }
     }
 }
