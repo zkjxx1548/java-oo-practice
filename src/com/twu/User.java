@@ -42,4 +42,19 @@ public class User {
                 .findFirst()
                 .orElse(new Event());
     }
+
+    public void buyEventChangePosition(List<Event> events, Event originEvent, String eventAndPrice) {
+        String[] buyEventInfoArr = eventAndPrice.split("-");
+        int buyEventPrice = Integer.parseInt(buyEventInfoArr[1]);
+        Event buyEvent = events.stream()
+                .filter(event -> Objects.equals(event.getDescribe(), buyEventInfoArr[0]))
+                .findFirst()
+                .orElse(new Event());
+        events.remove(buyEvent);
+        originEvent.setDescribe(buyEvent.getDescribe());
+        originEvent.setPrice(buyEventPrice);
+        events.stream()
+                .skip(buyEvent.getRanking())
+                .forEach(event -> event.setRanking(event.getRanking() - 1));
+    }
 }
