@@ -33,4 +33,13 @@ public class User {
                     }
                 });
     }
+
+    public Event getBuyOriginEvent(List<Event> events, String buyRankingString) {
+        int buyRanking = Integer.parseInt(buyRankingString);
+        return events.stream()
+                .sorted((o1, o2) -> o2.getHeat() - o1.getHeat())
+                .skip(buyRanking - 1)
+                .findFirst()
+                .orElse(new Event());
+    }
 }
