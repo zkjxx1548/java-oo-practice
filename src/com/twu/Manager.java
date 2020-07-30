@@ -1,6 +1,7 @@
 package com.twu;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -23,5 +24,13 @@ public class Manager {
         ) {
             events.add(new Event(0, eventString, 0));
         }
+    }
+
+    public void addSuperEvent(List<Event> events, String superEventString) {
+        Event superEvent = events.stream()
+                .filter(event -> Objects.equals(event.getDescribe(), superEventString))
+                .findFirst()
+                .orElse(new Event());
+        superEvent.setSuperEvent(true);
     }
 }
