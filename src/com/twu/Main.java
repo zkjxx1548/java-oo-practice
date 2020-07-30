@@ -102,4 +102,18 @@ public class Main {
         }
         scanner.close();
     }
+
+    public static void addEventManagerPage(Manager manager, List<Event> events) {
+        System.out.println("请输入想添加的热搜信息，如：eleven");
+        Scanner scanner = new Scanner(System.in);
+        String eventString  = scanner.nextLine();
+        manager.addEvent(events, eventString);
+    }
+
+    public static void addSuperEventPage(Manager manager, List<Event> events) {
+        System.out.println("请输入想添加的超级热搜信息，如：eleven");
+        Scanner scanner = new Scanner(System.in);
+        String superEventString  = scanner.nextLine();
+        manager.addSuperEvent(events, superEventString);
+    }
 }
