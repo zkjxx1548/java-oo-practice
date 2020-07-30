@@ -116,4 +116,18 @@ public class Main {
         String superEventString  = scanner.nextLine();
         manager.addSuperEvent(events, superEventString);
     }
+
+    public static void addEventUserPage(User user, List<Event> events) {
+        System.out.println("请输入想添加的热搜信息，如：eleven");
+        Scanner scanner = new Scanner(System.in);
+        String eventString  = scanner.nextLine();
+        user.addEvent(events, eventString);
+    }
+
+    public static void voteEventPage(User user, List<Event> events) {
+        System.out.println("请输入投票信息，总共不能超过10票，如：eleven-2,one-8");
+        Scanner scanner = new Scanner(System.in);
+        String voteString  = scanner.nextLine();
+        user.voteEvent(events, voteString);
+    }
 }
