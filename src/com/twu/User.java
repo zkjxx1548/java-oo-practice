@@ -1,5 +1,8 @@
 package com.twu;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class User {
@@ -11,6 +14,23 @@ public class User {
                     System.out.println(String.format("排名：%d，描述：%s，热度：%d。",
                             i.getAndIncrement(), event.getDescribe(), event.getHeat()));
                     event.setRanking(i.get() - 1);
+                });
+    }
+
+    public void voteEvent(List<Event> events, String voteString) {
+        String[] voteInfoArr = voteString.split(",");
+        Arrays.stream(voteInfoArr)
+                .map(s -> s.split("-"))
+                .forEach(strings -> {
+                    Event voteEvent = events.stream()
+                            .filter(event -> Objects.equals(event.getDescribe(), strings[0]))
+                            .findFirst()
+                            .orElse(new Event());
+                    if (voteEvent.isSuperEvent()) {
+                        voteEvent.setHeat(voteEvent.getHeat() + Integer.parseInt(strings[1]) * 2);
+                    } else {
+                        voteEvent.setHeat(voteEvent.getHeat() + Integer.parseInt(strings[1]));
+                    }
                 });
     }
 }
